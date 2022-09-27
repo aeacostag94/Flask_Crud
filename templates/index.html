@@ -1,0 +1,69 @@
+{% extends  "layout.html"  %}
+
+{% block body %} 
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <h1>Home Page</h1>
+
+
+
+    {%with messages =get_flashed_messages()%}
+     {%if messages %}
+     {%for message in messages%} 
+     <div class="alert alert-success" role="alert">
+      {{message}} 
+    </div>
+
+    {%endfor%}
+    {%endif%} 
+    {%endwith%}
+
+    <form action="/new" method="POST" class="card">
+      <label for="fullname"> <b><center> Write Full Name</center></b></label>
+      <input type="text" name="fullname" placeholder="Your name" />
+      <label for="email"><b> <font color="black"> <center>Write Email</center></font> </b></label>
+      <input type="email" name="email" placeholder="Your email" />
+      <label for="phone"> <b> <font color="black"> <center>Write Phone</center></font></b></label>
+      <input type="text" name="phone" placeholder="Your phone" />
+<br>
+      <button class="btn btn-primary">Save</button>
+    </form>
+
+    <hr />
+
+    <div>
+      {% for item in contacts %}
+
+      <div>
+        <h5>{{item.fullname}}</h5>
+
+        <p>{{item.email}}</p>
+        <p>{{item.phone}}</p>
+
+        <div>
+          <a href="{{url_for('contacts.update', id=item.id)}}" class="btn btn-primary btn-sm">Update</a>
+          <!--In this case i will use the function url_for to call the function delete, this because the function needs the id to delete the contact, and the function  does not allow or acept another parameter BUT url_for from Flask does.-->
+
+
+          <a href="{{url_for('contacts.delete', id=item.id)}}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+        <hr>
+      </div>
+
+      {% endfor %}
+    </div>
+  </body>
+
+
+</html>
+
+{%endblock%}
