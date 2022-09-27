@@ -12,3 +12,6 @@ with app.app_context():
 # This line let run python like py app.py and activate debug mode.
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+#This is to end the project and try git.
